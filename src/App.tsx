@@ -4,7 +4,7 @@ const App = () => {
 
   return (
     <div id="detail">
-        <Outlet />
+      <Outlet />
     </div>
   )
 }

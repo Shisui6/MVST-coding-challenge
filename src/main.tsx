@@ -9,12 +9,19 @@ import store from './redux/configureStore';
 import App from './App.tsx'
 import ErrorPage from './error-page.tsx';
 import './index.css'
+import Home from './components/Home/Home.tsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      }
+    ]
   },
 ]);
 
