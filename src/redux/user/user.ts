@@ -20,6 +20,7 @@ interface UserState {
     forks_count: number;
   }>;
   isLoading: boolean;
+  error: boolean;
 }
 
 const initialState: UserState = {
@@ -33,6 +34,7 @@ const initialState: UserState = {
   },
   repos: [],
   isLoading: false,
+  error: false
 };
 
 export const fetchUser = createAsyncThunk(
@@ -55,11 +57,26 @@ export const fetchRepos = createAsyncThunk(
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    resetUser: (state) => {
+      state.user = {
+        name: '',
+        username: '',
+        profileUrl: '',
+        bio: '',
+        followerCount: 0,
+        followingCount: 0,
+      };
+      state.repos = [];
+      state.isLoading = false;
+      state.error = false;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
         state.isLoading = true;
+        state.error = false;
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -72,19 +89,33 @@ export const userSlice = createSlice({
           followingCount: action.payload.following,
         }
         state.user = user;
+        state.error = false;
+      })
+      .addCase(fetchUser.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
       })
       .addCase(fetchRepos.pending, (state) => {
         state.isLoading = true;
+        state.error = false;
       })
       .addCase(fetchRepos.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.error = false;
         state.repos = action.payload;
+      })
+      .addCase(fetchRepos.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
       });
   },
 });
 
+export const { resetUser } = userSlice.actions;
+
 export const selectUser = (state: RootState) => state.user.user;
 export const selectRepos = (state: RootState) => state.user.repos;
 export const selectIsLoading = (state: RootState) => state.user.isLoading;
+export const selectError = (state: RootState) => state.user.error;
 
 export default userSlice.reducer;

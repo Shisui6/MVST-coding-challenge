@@ -1,38 +1,55 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useAppSelector } from '../../redux/hooks';
-import { selectRepos, selectUser } from "../../redux/user/user";
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { resetUser, selectIsLoading, selectRepos, selectUser } from "../../redux/user/user";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import CardSkeleton from "./CardSkeleton";
+import { useEffect } from "react";
+
 
 const User = () => {
   const user = useAppSelector(selectUser)
   const repos = useAppSelector(selectRepos)
+  const loading = useAppSelector(selectIsLoading);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.username === '') {
+      navigate('/');
+    }
+  });
+
+  const exit = () => {
+    dispatch(resetUser());
+    navigate('/');
+  }
 
   return (
     <section>
       <nav className="mt-10 text-center md:text-left md:mt-0 md:w-1/5 md:py-12 md:px-5 md:border-r md:fixed md:left-0 md:top-0 md:bottom-0 md:h-screen">
-        <img
+        {loading ? <Skeleton circle width={200} height={200} className="mb-5"/> :<img
           src={user.profileUrl}
           alt="profile"
           className="rounded-full mb-5 w-60 h-60 md:w-50 md:h-50 my-0 mx-auto"
-        />
-        <h1 className="text-2xl font-semibold text-gray-800">{user.name}</h1>
-        <h2 className="text-gray-400 mb-5">{user.username}</h2>
-        <p className="text-sm mb-5">{user.bio}</p>
+        />}
+        <h1 className="text-2xl font-semibold text-gray-800">{loading ? <Skeleton /> : user.name}</h1>
+        <h2 className="text-gray-400 mb-5">{loading ? <Skeleton width={90}/> : user.username}</h2>
+        <p className="text-sm mb-5">{loading ? <Skeleton count={4} /> : user.bio}</p>
         <div className="flex justify-center mb-4 md:justify-normal md:mb-0">
-          <p className="text-xs mr-4">
+          {loading ? <Skeleton width={50} className="mr-5"/> : <p className="text-xs mr-4">
             <strong className="text-gray-700">{user.followerCount}</strong> Followers
-          </p>
-          <p className="text-xs">
+          </p>}
+          {loading ? <Skeleton width={50} /> : <p className="text-xs">
             <strong className="text-gray-700">{user.followingCount}</strong> Following
-          </p>
+          </p>}
         </div>
-        <Link to='/'>
-          <button className="flex items-center justify-center md:justify-normal w-[10%] md:w-[82%] my-0 md:my-auto mx-auto rounded-lg duration-150 md:absolute md:bottom-9 text-sm p-2 text-gray-700 hover:bg-[#f8f9fa]">
-            <BiLogOut className="text-gray-400 mr-3" size={25} />
-            Exit
-          </button>
-        </Link>
+        <button onClick={exit} className="flex items-center justify-center md:justify-normal w-[10%] md:w-[82%] my-0 md:my-auto mx-auto rounded-lg duration-150 md:absolute md:bottom-9 text-sm p-2 text-gray-700 hover:bg-[#f8f9fa]">
+          <BiLogOut className="text-gray-400 mr-3" size={25} />
+          Exit
+        </button>
       </nav>
       <main className="md:ml-[20%]">
         <div className="max-w-screen-lg mx-auto px-4 md:px-8">
@@ -43,7 +60,13 @@ const User = () => {
           </div>
           </div>
           <ul className="mt-5 divide-y space-y-3">
-            {repos.map((repo) => (
+            {loading ? 
+            <>
+              <CardSkeleton/>
+              <CardSkeleton />
+              <CardSkeleton />
+            </>
+            : repos.map((repo) => (
               console.log(repo),
             <li className="px-4 py-5 duration-150 hover:border-white hover:rounded-xl hover:bg-gray-50">
               <a className="space-y-3">
