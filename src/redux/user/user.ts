@@ -37,7 +37,7 @@ const initialState: UserState = {
 
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
-  async (data) => {
+  async (data: string) => {
     const response = await axios.get(`https://api.github.com/users/${data}`);
     return response.data;
   },
@@ -45,7 +45,7 @@ export const fetchUser = createAsyncThunk(
 
 export const fetchRepos = createAsyncThunk(
   'user/fetchRepos',
-  async (data) => {
+  async (data: string) => {
     const response = await axios.get(`https://api.github.com/users/${data}/repos`);
     return response.data;
   },

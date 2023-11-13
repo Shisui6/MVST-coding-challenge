@@ -1,29 +1,30 @@
 import { Link } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useAppSelector } from '../../redux/hooks';
+import { selectRepos, selectUser } from "../../redux/user/user";
 
 const User = () => {
+  const user = useAppSelector(selectUser)
+  const repos = useAppSelector(selectRepos)
+
   return (
     <section>
       <nav className="mt-10 text-center md:text-left md:mt-0 md:w-1/5 md:py-12 md:px-5 md:border-r md:fixed md:left-0 md:top-0 md:bottom-0 md:h-screen">
         <img
-          src="/public/IMG_E1798.JPG"
+          src={user.profileUrl}
           alt="profile"
           className="rounded-full mb-5 w-60 h-60 md:w-50 md:h-50 my-0 mx-auto"
         />
-        <h1 className="text-2xl font-semibold text-gray-800">Okemdi Udeh</h1>
-        <h2 className="text-gray-400 mb-5">Shisui6</h2>
-        <p className="text-sm mb-5">
-          Software Engineer with an eye for developing elegant applications.
-          Stack: JavaScript, React, Redux, Ruby, Rails. Open to new
-          opportunities.
-        </p>
+        <h1 className="text-2xl font-semibold text-gray-800">{user.name}</h1>
+        <h2 className="text-gray-400 mb-5">{user.username}</h2>
+        <p className="text-sm mb-5">{user.bio}</p>
         <div className="flex justify-center mb-4 md:justify-normal md:mb-0">
           <p className="text-xs mr-4">
-            <strong className="text-gray-700">51</strong> Followers
+            <strong className="text-gray-700">{user.followerCount}</strong> Followers
           </p>
           <p className="text-xs">
-            <strong className="text-gray-700">39</strong> Following
+            <strong className="text-gray-700">{user.followingCount}</strong> Following
           </p>
         </div>
         <Link to='/'>
@@ -42,111 +43,29 @@ const User = () => {
           </div>
           </div>
           <ul className="mt-5 divide-y space-y-3">
+            {repos.map((repo) => (
+              console.log(repo),
             <li className="px-4 py-5 duration-150 hover:border-white hover:rounded-xl hover:bg-gray-50">
               <a className="space-y-3">
                 <div className="flex items-center gap-x-3">
                   <div>
                     <h3 className="text-base text-purple-600 font-semibold mt-1">
-                      Full Stack Engineer
+                      {repo.name}
                     </h3>
                   </div>
                 </div>
                 <p className="text-gray-600 sm:text-sm">
-                  Software Engineer with an eye for developing elegant
-                  applications. Stack: JavaScript, React, Redux, Ruby, Rails.
-                  Open to new opportunities.
+                  {repo.description}
                 </p>
                 <div className="text-sm text-gray-600 flex items-center gap-6">
                   <span className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                    HTML
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                    CSS
+                    {repo.language}
                   </span>
                 </div>
               </a>
             </li>
-            <li className="px-4 py-5 duration-150 hover:border-white hover:rounded-xl hover:bg-gray-50">
-              <a className="space-y-3">
-                <div className="flex items-center gap-x-3">
-                  <div>
-                    <h3 className="text-base text-purple-600 font-semibold mt-1">
-                      Full Stack Engineer
-                    </h3>
-                  </div>
-                </div>
-                <p className="text-gray-600 sm:text-sm">
-                  Software Engineer with an eye for developing elegant
-                  applications. Stack: JavaScript, React, Redux, Ruby, Rails.
-                  Open to new opportunities.
-                </p>
-                <div className="text-sm text-gray-600 flex items-center gap-6">
-                  <span className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                    HTML
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                    CSS
-                  </span>
-                </div>
-              </a>
-            </li>
-            <li className="px-4 py-5 duration-150 hover:border-white hover:rounded-xl hover:bg-gray-50">
-              <a className="space-y-3">
-                <div className="flex items-center gap-x-3">
-                  <div>
-                    <h3 className="text-base text-purple-600 font-semibold mt-1">
-                      Full Stack Engineer
-                    </h3>
-                  </div>
-                </div>
-                <p className="text-gray-600 sm:text-sm">
-                  Software Engineer with an eye for developing elegant
-                  applications. Stack: JavaScript, React, Redux, Ruby, Rails.
-                  Open to new opportunities.
-                </p>
-                <div className="text-sm text-gray-600 flex items-center gap-6">
-                  <span className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                    HTML
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                    CSS
-                  </span>
-                </div>
-              </a>
-            </li>
-            <li className="px-4 py-5 duration-150 hover:border-white hover:rounded-xl hover:bg-gray-50">
-              <a className="space-y-3">
-                <div className="flex items-center gap-x-3">
-                  <div>
-                    <h3 className="text-base text-purple-600 font-semibold mt-1">
-                      Full Stack Engineer
-                    </h3>
-                  </div>
-                </div>
-                <p className="text-gray-600 sm:text-sm">
-                  Software Engineer with an eye for developing elegant
-                  applications. Stack: JavaScript, React, Redux, Ruby, Rails.
-                  Open to new opportunities.
-                </p>
-                <div className="text-sm text-gray-600 flex items-center gap-6">
-                  <span className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                    HTML
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                    CSS
-                  </span>
-                </div>
-              </a>
-            </li>
-          
+            ))}
           </ul>
         </div>
       </main>
