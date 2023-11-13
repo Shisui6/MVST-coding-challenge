@@ -13,12 +13,14 @@ interface UserState {
     followingCount: number;
   };
   repos: Array<{
+    id: number;
     name: string;
     description: string;
     language: string;
     stargazers_count: number;
     forks_count: number;
   }>;
+  filter: string;
   isLoading: boolean;
   error: boolean;
 }
@@ -33,6 +35,7 @@ const initialState: UserState = {
     followingCount: 0,
   },
   repos: [],
+  filter: '',
   isLoading: false,
   error: false
 };
@@ -70,7 +73,10 @@ export const userSlice = createSlice({
       state.repos = [];
       state.isLoading = false;
       state.error = false;
-    }
+    },
+    setFilter(state, action) {
+      state.filter = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -111,11 +117,21 @@ export const userSlice = createSlice({
   },
 });
 
-export const { resetUser } = userSlice.actions;
+export const { resetUser, setFilter } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.user;
 export const selectRepos = (state: RootState) => state.user.repos;
 export const selectIsLoading = (state: RootState) => state.user.isLoading;
 export const selectError = (state: RootState) => state.user.error;
+export const selectFilter = (state: RootState) => state.user.filter;
+export const selectFilteredRepos = (state: RootState) => {
+  const repos = selectRepos(state);
+  const filter = selectFilter(state);
+  if (filter !== '') {
+    return repos.filter((repo) => repo.name.toLowerCase().includes(filter.toLowerCase()));
+  }
+
+  return repos;
+};
 
 export default userSlice.reducer;
