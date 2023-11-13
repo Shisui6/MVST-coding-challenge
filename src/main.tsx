@@ -10,6 +10,7 @@ import App from './App.tsx'
 import ErrorPage from './error-page.tsx';
 import './index.css'
 import Home from './components/Home/Home.tsx';
+import User from './components/User/User.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
-      }
+      },
+      {
+        path: '/:username',
+        element: <User />
+      },
     ]
   },
 ]);
