@@ -86,9 +86,9 @@ const User = () => {
               <CardSkeleton />
             </>
             : repos.length === 0 ? 
-            <div className="text-center mt-20 mb-20">
-              <img src={img} alt="search" className="mb-7 mx-auto" />
-              <h1 className="text-2xl font-semibold text-gray-800">No repositories found</h1>
+            <div className="text-center">
+              <img src={img} alt="search" className="mb-7 mt-16 mx-auto" />
+              <h1 className="text-2xl font-semibold text-gray-800 mb-20">No repositories found</h1>
             </div>
             : repos.map((repo) => (
             <li key={repo.id} className="px-4 py-5 duration-150 hover:border-white hover:rounded-xl hover:bg-gray-50">

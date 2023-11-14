@@ -42,7 +42,7 @@ const Home = () => {
       <p className=" w-1/2 my-0 mx-auto text-[#4b5563]">Welcome to GitSearch. Here you can simply enter the username of a GitHub user to view their repositories. Try it using the search bar below</p>
       <form
       onSubmit={formik.handleSubmit}
-      className="mt-10 mb-5 w-1/4 my-0 mx-auto bg-white h-12 rounded-3xl border-[1.2px] border-gray-300 focus-within:border-purple-600 flex justify-between py-1 pr-1 items-center min-w-[285px]">
+      className="mt-10 mb-5 w-1/4 my-0 mx-auto bg-white h-12 rounded-3xl border-[1.2px] border-gray-300 focus-within:border-purple-600 flex justify-between py-1 pr-1 items-center min-w-[300px]">
         <div>
           <AiOutlineSearch className="inline-block text-gray-400 ml-3 mr-3" size={22} />
           <input
@@ -58,7 +58,7 @@ const Home = () => {
           <BsArrowRightShort className=" text-white" size={22} />
         </button>
       </form>
-      {error && <span className=" text-red-700 text-xs">Hmm...That user doesn't seem to exist. Please check the spelling and try again</span>}
+      {error && <span className=" text-red-700 text-xs px-5">Hmm...That user doesn't seem to exist. Please check the spelling and try again</span>}
     </div>
   );
 }
