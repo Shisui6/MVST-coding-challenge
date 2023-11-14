@@ -56,7 +56,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://gitsearch-zeta-olive.vercel.app/)
+- [Live Demo Link](https://gitsearch-shisui6.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
