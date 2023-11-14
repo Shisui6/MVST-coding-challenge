@@ -1,3 +1,4 @@
+// Import necessary dependencies
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
@@ -12,6 +13,7 @@ import './index.css'
 import Home from './components/Home/Home.tsx';
 import User from './components/User/User.tsx';
 
+// Create a browser router with routes
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
   },
 ]);
 
+// Render the application
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
