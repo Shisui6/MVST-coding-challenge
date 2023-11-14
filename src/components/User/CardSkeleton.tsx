@@ -1,6 +1,16 @@
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+// Import necessary dependencies
+import Skeleton from 'react-loading-skeleton';
+/* c8 ignore start */
+import 'react-loading-skeleton/dist/skeleton.css';
+/* c8 ignore end */
 
+/**
+ * CardSkeleton component
+ * This component is responsible for rendering the skeleton for a repository card
+ * 
+ * @returns CardSkeleton component
+ * @param {void}
+ * */
 const CardSkeleton = () => {
   return ( 
     <li className="px-4 py-5 duration-150 hover:border-white hover:rounded-xl hover:bg-gray-50">

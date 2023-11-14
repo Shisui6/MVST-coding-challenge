@@ -1,27 +1,38 @@
+// Import necessary dependencies
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineSearch, AiFillGithub } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { resetUser, selectFilteredRepos, selectIsLoading, selectUser, setFilter } from "../../redux/user/user";
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
 import CardSkeleton from "./CardSkeleton";
-import { useEffect } from "react";
 
-
+/**
+ * User component
+ * This component is responsible for rendering the user data and repo data
+ * It contains a sidebar for displaying the user's data, and a main section for displaying the user's repositories
+ * 
+ * @returns User component
+ * @param {void}
+ * */
 const User = () => {
+  // Get user data from redux store
   const user = useAppSelector(selectUser)
   const repos = useAppSelector(selectFilteredRepos)
   const loading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  // Effect for redirecting to home page if user is not loaded
   useEffect(() => {
     if (user.username === '') {
       navigate('/');
     }
   });
 
+  // Define the exit function
+  // This function dispatches the resetUser action which resets user data and navigates to the home page
   const exit = () => {
     dispatch(resetUser());
     navigate('/');
@@ -66,6 +77,7 @@ const User = () => {
           </div>
           </div>
           <ul className="mt-5 divide-y space-y-3">
+            <p className="text-xs text-right text-gray-400">{repos.length} Repositories</p>
             {loading ? 
             <>
               <CardSkeleton/>

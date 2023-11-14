@@ -1,3 +1,4 @@
+// Import necessary dependencies
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsArrowRightShort } from "react-icons/bs";
 import { useFormik } from 'formik';
@@ -5,17 +6,29 @@ import { fetchRepos, fetchUser, selectError } from "../../redux/user/user";
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Home component
+ * This component is responsible for rendering the home page
+ * It contains a form for enabling the user to search for a GitHub user using their username
+ * 
+ * @returns Home component
+ * @param {void}
+ * */
 const Home = () => {
+  
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const error = useAppSelector(selectError);
 
+  // Define the onSubmit function for the form
+  // This function dispatches the fetchUser and fetchRepos actions, and navigates to the user's page
   const onSubmit = async (values: { username: string; }) => {
     await dispatch(fetchUser(values.username));
     navigate(`/${values.username}`);
     dispatch(fetchRepos(values.username));
   }
 
+  // Initialize formik for form handling
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -35,10 +48,11 @@ const Home = () => {
           <input
             minLength={3}
             required
+            data-testid="username"
             onChange={formik.handleChange}
             value={formik.values.username}
             name="username"
-            className=" h-full border-none outline-none"  type="text" placeholder="Enter a username" />
+            className=" h-full border-none outline-none bg-white" type="text" placeholder="Enter a username" />
         </div>
         <button type="submit" className=" bg-purple-600 w-9 h-9 rounded-full flex items-center justify-center hover:bg-purple-800 cursor-pointer duration-150">
           <BsArrowRightShort className=" text-white" size={22} />

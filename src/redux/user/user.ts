@@ -1,8 +1,10 @@
 /* eslint-disable no-param-reassign */
+// Import necessary dependencies
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../configureStore'
 import axios from 'axios';
 
+// Define a type for the slice state
 interface UserState {
   user: {
     name: string;
@@ -25,6 +27,7 @@ interface UserState {
   error: boolean;
 }
 
+// Define the initial state using that type
 const initialState: UserState = {
   user: {
     name: '',
@@ -40,6 +43,7 @@ const initialState: UserState = {
   error: false
 };
 
+// Define a thunk that dispatches an action for fetching user data
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
   async (data: string) => {
@@ -48,6 +52,7 @@ export const fetchUser = createAsyncThunk(
   },
 );
 
+// Define a thunk that dispatches an action for fetching user repos
 export const fetchRepos = createAsyncThunk(
   'user/fetchRepos',
   async (data: string) => {
@@ -56,7 +61,7 @@ export const fetchRepos = createAsyncThunk(
   },
 );
 
-
+// Create a slice for our user data
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -77,6 +82,9 @@ export const userSlice = createSlice({
     setFilter(state, action) {
       state.filter = action.payload;
     },
+    setError(state, action) {
+      state.error = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -117,8 +125,10 @@ export const userSlice = createSlice({
   },
 });
 
-export const { resetUser, setFilter } = userSlice.actions;
+// Export actions
+export const { resetUser, setFilter, setError } = userSlice.actions;
 
+// Export selectors
 export const selectUser = (state: RootState) => state.user.user;
 export const selectRepos = (state: RootState) => state.user.repos;
 export const selectIsLoading = (state: RootState) => state.user.isLoading;
@@ -134,4 +144,5 @@ export const selectFilteredRepos = (state: RootState) => {
   return repos;
 };
 
+// Export the reducer as a default export
 export default userSlice.reducer;

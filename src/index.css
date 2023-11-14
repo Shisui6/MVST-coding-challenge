@@ -1,3 +1,4 @@
+/* Import tailwind base styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,6 +17,7 @@
   border-radius: 10px;
 }
 
+/* Global styles */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -31,11 +33,13 @@
   background: rgb(145, 145, 145);
 }
 
+/* All */
 * {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Body */
 body {
   margin: 0;
   padding: 0;
@@ -44,6 +48,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Error page */
 #error-page {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/error.jpg');
   background-size: cover;
