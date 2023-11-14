@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { resetUser, selectFilteredRepos, selectIsLoading, selectUser, setFilter } from "../../redux/user/user";
 import Skeleton from 'react-loading-skeleton';
 import CardSkeleton from "./CardSkeleton";
+import img from '../../images/search.png'
 
 /**
  * User component
@@ -86,7 +87,7 @@ const User = () => {
             </>
             : repos.length === 0 ? 
             <div className="text-center mt-20 mb-20">
-              <img src="/public/search.png" alt="search" className="mb-7 mx-auto" />
+              <img src={img} alt="search" className="mb-7 mx-auto" />
               <h1 className="text-2xl font-semibold text-gray-800">No repositories found</h1>
             </div>
             : repos.map((repo) => (
