@@ -52,7 +52,7 @@ const Home = () => {
             onChange={formik.handleChange}
             value={formik.values.username}
             name="username"
-            className=" h-full border-none outline-none"  type="text" placeholder="Enter a username" />
+            className=" h-full border-none outline-none bg-white" type="text" placeholder="Enter a username" />
         </div>
         <button type="submit" className=" bg-purple-600 w-9 h-9 rounded-full flex items-center justify-center hover:bg-purple-800 cursor-pointer duration-150">
           <BsArrowRightShort className=" text-white" size={22} />
