@@ -1,13 +1,12 @@
 // Import necessary dependencies
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineSearch, AiFillGithub } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { resetUser, selectFilteredRepos, selectIsLoading, selectUser, setFilter } from "../../redux/user/user";
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
 import CardSkeleton from "./CardSkeleton";
-import { useEffect } from "react";
 
 /**
  * User component
@@ -78,6 +77,7 @@ const User = () => {
           </div>
           </div>
           <ul className="mt-5 divide-y space-y-3">
+            <p className="text-xs text-right text-gray-400">{repos.length} Repositories</p>
             {loading ? 
             <>
               <CardSkeleton/>

@@ -48,6 +48,7 @@ const Home = () => {
           <input
             minLength={3}
             required
+            data-testid="username"
             onChange={formik.handleChange}
             value={formik.values.username}
             name="username"

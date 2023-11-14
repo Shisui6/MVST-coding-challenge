@@ -1,6 +1,8 @@
 // Import necessary dependencies
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
+/* c8 ignore start */
+import 'react-loading-skeleton/dist/skeleton.css';
+/* c8 ignore end */
 
 /**
  * CardSkeleton component

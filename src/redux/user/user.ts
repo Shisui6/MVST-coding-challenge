@@ -82,6 +82,9 @@ export const userSlice = createSlice({
     setFilter(state, action) {
       state.filter = action.payload;
     },
+    setError(state, action) {
+      state.error = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -123,7 +126,7 @@ export const userSlice = createSlice({
 });
 
 // Export actions
-export const { resetUser, setFilter } = userSlice.actions;
+export const { resetUser, setFilter, setError } = userSlice.actions;
 
 // Export selectors
 export const selectUser = (state: RootState) => state.user.user;
